@@ -2,10 +2,13 @@ README.md
 pyproject.toml
 setup.py
 flipkart/__init__.py
+flipkart/config.py
+flipkart/rag_chain.py
 flipkart/data_loader/__init__.py
+flipkart/data_loader/data_converter.py
+flipkart/data_loader/data_ingestion.py
 flipkart_product_recommender.egg-info/PKG-INFO
 flipkart_product_recommender.egg-info/SOURCES.txt
 flipkart_product_recommender.egg-info/dependency_links.txt
-flipkart_product_recommender.egg-info/requires.txt
 flipkart_product_recommender.egg-info/top_level.txt
 utils/__init__.py
