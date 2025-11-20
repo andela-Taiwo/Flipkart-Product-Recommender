@@ -12,3 +12,5 @@ __pycache__
 *.pyzwzw
 *.pyzwzwz
 CODE_REVIEW.md
+logs/
+__pycache__/
