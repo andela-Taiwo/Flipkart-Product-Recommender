@@ -68,9 +68,30 @@
 						},
 						type: "POST",
 						url: "/chat",
+						dataType: "json"
 					}).done(function(data) {
-						var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://static.vecteezy.com/system/resources/previews/016/017/018/non_2x/ecommerce-icon-free-png.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+						// Handle JSON response
+						var responseText = data.answer || data.error || "I'm sorry, I couldn't process your request.";
+						var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://static.vecteezy.com/system/resources/previews/016/017/018/non_2x/ecommerce-icon-free-png.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + responseText + '<span class="msg_time">' + str_time + '</span></div></div>';
 						$("#messageFormeight").append($.parseHTML(botHtml));
+						// Scroll to bottom
+						$("#messageFormeight").scrollTop($("#messageFormeight")[0].scrollHeight);
+					}).fail(function(xhr) {
+						// Handle errors
+						var errorMessage = "Sorry, an error occurred. Please try again.";
+						if (xhr.responseJSON && xhr.responseJSON.error) {
+							errorMessage = xhr.responseJSON.error;
+						} else if (xhr.responseText) {
+							try {
+								var errorData = JSON.parse(xhr.responseText);
+								errorMessage = errorData.error || errorMessage;
+							} catch(e) {
+								errorMessage = "Server error. Please try again later.";
+							}
+						}
+						var errorHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://static.vecteezy.com/system/resources/previews/016/017/018/non_2x/ecommerce-icon-free-png.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer" style="color: #dc3545;">' + errorMessage + '<span class="msg_time">' + str_time + '</span></div></div>';
+						$("#messageFormeight").append($.parseHTML(errorHtml));
+						$("#messageFormeight").scrollTop($("#messageFormeight")[0].scrollHeight);
 					});
 					event.preventDefault();
 				});
