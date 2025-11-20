@@ -1,5 +1,5 @@
 def main():
-    print("Hello from flipkar-product-recommender!")
+    print("Hello from flipkart-product-recommender!")
 
 
 if __name__ == "__main__":
