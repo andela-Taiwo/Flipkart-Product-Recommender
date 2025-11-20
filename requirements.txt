@@ -11,3 +11,5 @@ langchain-astradb
 datasets
 flask
 prometheus-client
+python-dotenv
+sentence-transformers

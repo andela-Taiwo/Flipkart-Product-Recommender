@@ -78,7 +78,7 @@ class DataIngestor:
             logger.info(f"Adding {len(documents)} documents to vector store")
             self.vstore.add_documents(documents)
             logger.info("Data ingestion completed successfully")
-            
+            print("Igot hereeeee>>>>>>>>>>>>>>>>>>>>>>>>>")
             return self.vstore
         except Exception as e:
             logger.error(f"Error during data ingestion: {e}")
