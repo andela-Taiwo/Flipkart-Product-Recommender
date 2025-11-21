@@ -37,7 +37,7 @@
   ```bash
   git clone https://github.com/andelat-Taiwo/Flipkart-product-Recommender.git
   ls
-  cd TESTING-9
+  cd Flipkart-Product-Recommender
   ls  # You should see the contents of your project
   ```
 
