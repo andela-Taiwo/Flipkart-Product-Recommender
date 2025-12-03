@@ -171,11 +171,6 @@ kubectl get pods
 ### U will see pods runiing
 
 
-kubectl port-forward svc/flask-service 5000:80 --address 0.0.0.0
-
-## Now copy external ip and :5000 and see ur app there....
-
-
 ```
 
 ### 6. PROMETHEUS AND GRAFANA MONITORING OF YOUR APP
@@ -194,13 +189,26 @@ kubectl apply -f prometheus/prometheus-deployment.yaml
 
 kubectl apply -f grafana/grafana-deployment.yaml
 
+### 7. Running all the services app and monitoring in the background
+
+  # Run this once to start all services in background
+  tmux new-session -d -s flask 'kubectl port-forward svc/flask-service 5000:80 --address 0.0.0.0'
+  tmux new-session -d -s prometheus 'kubectl port-forward --address 0.0.0.0 svc/prometheus-service -n monitoring 9090:9090'
+  tmux new-session -d -s grafana 'kubectl port-forward --address 0.0.0.0 svc/grafana-service -n monitoring 3000:3000'
+  
+  echo "Services started!"
+  echo "Access:"
+  echo "  Flask:      http://$(curl -s ifconfig.me):5000"
+  echo "  Prometheus: http://$(curl -s ifconfig.me):9090"
+  echo "  Grafana:    http://$(curl -s ifconfig.me):3000"
+
+### Running on different individual shell session
 ## Check target health also..
 ## On IP:9090
 kubectl port-forward --address 0.0.0.0 svc/prometheus-service -n monitoring 9090:9090
 
 ## Username:Pass --> admin:admin
 kubectl port-forward --address 0.0.0.0 svc/grafana-service -n monitoring 3000:3000
-
 
 
 Configure Grafana
